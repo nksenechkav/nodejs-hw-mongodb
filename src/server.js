@@ -3,6 +3,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 import { env } from './utils/env.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
@@ -42,7 +43,7 @@ app.get('/contacts/:contactId', async (req, res) => {
   const { contactId } = req.params;
     const contact = await getContactById(contactId);
 
-    if (!contact) {
+    if (!mongoose.Types.ObjectId.isValid(contactId)) {
       return res.status(404).json({
         message: `Contact with id ${contactId} not found.`,
       });
