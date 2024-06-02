@@ -41,17 +41,24 @@ app.get('/contacts', async (req, res) => {
 
 app.get('/contacts/:contactId', async (req, res) => {
   const { contactId } = req.params;
-    const contact = await getContactById(contactId);
 
-    if (!mongoose.Types.ObjectId.isValid(contactId)) {
-      return res.status(404).json({
-        message: `Contact with id ${contactId} not found.`,
-      });
-    }
+  if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    return res.status(404).json({
+      message: `Contact with id ${contactId} is invalid.`,
+    });
+  }
 
-    res.status(200).json({
-      data: contact,
-      message: `Successfully found contact with id ${contactId}!`,
+  const contact = await getContactById(contactId);
+
+  if (!contact) {
+    return res.status(404).json({
+      message: `Contact with id ${contactId} not found.`,
+    });
+  }
+
+  res.status(200).json({
+    data: contact,
+    message: `Successfully found contact with id ${contactId}!`,
   });
 });
 
