@@ -1,4 +1,5 @@
  // src/services/contacts.js
+
  import { ContactsCollection } from '../db/models/contact.js';
 
  export const getAllContacts = async () => {
