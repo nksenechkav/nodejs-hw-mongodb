@@ -17,8 +17,10 @@ import { createContactSchema, updateContactSchema } from '../validation/contacts
 
 const router = Router();
 
+router.use('/contacts/:contactId', isValidId);
+
 router.get('/contacts', ctrlWrapper (getContactsController));
-router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactByIdController));
+router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
 router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(createContactController));
 router.patch('/contacts/:contactId', validateBody(updateContactSchema),ctrlWrapper(patchContactController));
 router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
