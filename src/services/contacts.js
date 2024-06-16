@@ -23,15 +23,24 @@
       contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
 
-   const contactsCount = await ContactsCollection.find()
-   .merge(contactsQuery)
-   .countDocuments();
+  //  const contactsCount = await ContactsCollection.find()
+  //  .merge(contactsQuery)
+  //  .countDocuments();
 
-   const contacts = await contactsQuery
-   .skip(skip)
-   .limit(limit)
-   .sort({ [sortBy]: sortOrder })
-   .exec();
+  //  const contacts = await contactsQuery
+  //  .skip(skip)
+  //  .limit(limit)
+  //  .sort({ [sortBy]: sortOrder })
+  //  .exec();
+
+   const [contactsCount, contacts] = await Promise.all([
+    ContactsCollection.find().merge(contactsQuery).countDocuments(),
+    contactsQuery
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sortBy]: sortOrder })
+      .exec(),
+  ]);
 
     const paginationData = calculatePaginationData(contactsCount, perPage, page);
 
