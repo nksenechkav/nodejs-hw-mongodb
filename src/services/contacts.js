@@ -10,6 +10,7 @@
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
   filter = {},
+  userId,
 }) => {
    const limit = perPage;
    const skip = (page - 1) * perPage;
@@ -22,6 +23,8 @@
    if (filter.isFavourite) {
       contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
+
+//  contactsQuery.where('userId').equals(userId);
 
   //  const contactsCount = await ContactsCollection.find()
   //  .merge(contactsQuery)
@@ -55,8 +58,8 @@
    return contact;
  };
 
- export const createContact = async (payload) => {
-  const contact = await ContactsCollection.create(payload);
+ export const createContact = async ({payload, userId}) => {
+  const contact = await ContactsCollection.create({...payload, userId});
   return contact;
 };
 
