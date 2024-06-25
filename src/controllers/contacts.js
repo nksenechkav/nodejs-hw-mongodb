@@ -11,7 +11,7 @@
     const { page, perPage } = parsePaginationParams(req.query);
     const { sortBy, sortOrder } = parseSortParams(req.query);
     const filter = parseFilterParams(req.query);
-    const userId  = req.user._id;
+    const userId = req.user._id;
 
     const contacts = await getAllContacts({
       page,
@@ -65,7 +65,7 @@
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId  = req.user._id;
-  const result = await updateContact(contactId, userId, req.body);
+  const result = await updateContact(contactId, userId, req.body );
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
