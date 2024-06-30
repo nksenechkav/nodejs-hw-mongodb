@@ -104,24 +104,23 @@ export const requestResetToken = async (email) => {
       expiresIn: '5m',
     },
   );
-  console.log(resetToken);
+  
+  const resetPasswordTemplatePath = path.join(
+    TEMPLATES_DIR,
+    'reset-password-email.html',
+  );
+
+  const templateSource = (
+    await fs.readFile(resetPasswordTemplatePath)
+  ).toString();
+
+  const template = handlebars.compile(templateSource);
+  const html = template({
+    name: user.name,
+    link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
+  });
 
   try {
-    const resetPasswordTemplatePath = path.join(
-      TEMPLATES_DIR,
-      'reset-password-email.html',
-    );
-
-    const templateSource = (
-      await fs.readFile(resetPasswordTemplatePath)
-    ).toString();
-
-    const template = handlebars.compile(templateSource);
-    const html = template({
-      name: user.name,
-      link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
-    });
-
     await sendEmail({
       from: env(SMTP.SMTP_FROM),
       to: email,
