@@ -104,7 +104,7 @@ export const requestResetToken = async (email) => {
       expiresIn: '5m',
     },
   );
-  
+
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
@@ -128,7 +128,7 @@ export const requestResetToken = async (email) => {
       html,
     });
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(500, 'Failed to send the email, please try again later.');
+    if (err instanceof Error) throw createHttpError(500, err.message);
     throw err;
   }
 };
