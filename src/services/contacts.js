@@ -56,15 +56,15 @@
    return contact;
  };
 
- export const createContact = async ({payload, photo: photoUrl}, userId) => {
-  const contact = await ContactsCollection.create({...payload, photo: photoUrl, userId});
+ export const createContact = async (payload, userId) => {
+  const contact = await ContactsCollection.create({...payload, userId});
   return contact;
 };
 
- export const updateContact = async (contactId, userId, {payload, photo: photoUrl}, options = {}) => {
+ export const updateContact = async (contactId, userId, payload, options = {}) => {
   const rawResult = await ContactsCollection.findOneAndUpdate(
     { _id: contactId, userId },
-    {payload, photo: photoUrl},
+    payload,
     {
       new: true,
       includeResultMetadata: true,
