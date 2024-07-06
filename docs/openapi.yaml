@@ -4,7 +4,7 @@ info:
   title: Contacts app
   license:
     name: Apache 2.0
-    url: <http://www.apache.org/licenses/LICENSE-2.0.html>
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: >
     This is a documentation of Contacts app
 tags:
@@ -13,15 +13,17 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  #  - url: http://localhost:3000
-   - url: https://contacts5-9573.onrender.com
+  - url: https://localhost:3000
+  - url: https://contacts5-9573.onrender.com
 paths:
- /contacts/{id}:
+  /contacts:
     get:
-      $ref: ./swagger/paths/contacts/{id}/get.yaml
- /contacts:
+      $ref: ../swagger/paths/contacts/get.yaml
     post:
-      $ref: ./swagger/paths/contacts/post.yaml
+      $ref: ../swagger/paths/contacts/post.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:
