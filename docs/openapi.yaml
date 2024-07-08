@@ -14,7 +14,7 @@ tags:
     description: Auth operations.
 servers:
   # - url: http://localhost:3000
-  - url: https://contacts5-9573.onrender.com
+  - url: https://contacts-app-bu14.onrender.com
 paths:
   /contacts:
     get:
@@ -26,6 +26,8 @@ paths:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
     patch:
       $ref: ../swagger/paths/contacts/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/contacts/{id}/delete.yaml
 components:
   securitySchemes:
     bearerAuth:
