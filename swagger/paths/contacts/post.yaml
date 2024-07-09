@@ -14,16 +14,16 @@ requestBody:
         type: object
         required:
           - name
-          - phoneNubmer
+          - phoneNumber
           - contactType
-          - UserId
+          - userId
         properties:
           name:
             description: "Contact's name"
             type: string
             example: 'John Doe'
-          phoneNubmer:
-            description: "Contact's phoneNubmer"
+          phoneNumber:
+            description: "Contact's phoneNumber"
             type: string
             example: '+3800000000032'
           email:
@@ -39,7 +39,7 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
             example: personal
-          UserId:
+          userId:
             description: "User's id"
             type: string
             example: 65e4decdd286b30065d54af9
